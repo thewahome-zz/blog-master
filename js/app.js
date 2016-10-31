@@ -7,7 +7,8 @@ angular.module('myApp', [
 	'myApp.filters',
 	'myApp.services',
 	'myApp.directives',
-	'myApp.controllers'
+	'myApp.controllers',
+	'ngToast'
 	]).
 config(['$routeProvider', function($routeProvider) {
 
@@ -30,4 +31,15 @@ config(['$routeProvider', function($routeProvider) {
 	$routeProvider.when('/newpost', {templateUrl: 'partials/backend/newpost.html', controller: 'NewPostCtrl'});
 
 	$routeProvider.otherwise({redirectTo: '/login'});
-}]);
+}])
+
+.config(['ngToastProvider', function(ngToastProvider) {
+  ngToastProvider.configure({
+    animation: 'fade',
+    horizontalPosition: 'center',
+    maxNumber:1, 
+    timeout:6000
+  });
+}])
+
+;

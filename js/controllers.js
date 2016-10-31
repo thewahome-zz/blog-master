@@ -3,7 +3,8 @@
 /* Controllers */
 
 angular.module('myApp.controllers', [])
-    .controller('RegistrationCtrl', ['$scope', '$http', '$location', 'headerFooterData', function ($scope, $http, $location, headerFooterData) {
+.controller('RegistrationCtrl', ['$scope', '$http', '$location', 'headerFooterData','ngToast', 
+    function ($scope, $http, $location, headerFooterData, ngToast) {
 
         headerFooterData.getHeaderFooterData().then(function (data) {
             // console.log(data);
@@ -16,13 +17,14 @@ angular.module('myApp.controllers', [])
 
         var loadCSRFToken = function () {
             $http.get('api/registration')
-                .success(function (data, status, headers, config) {
+            .success(function (data, status, headers, config) {
                     // console.log(data);
                     $scope.csrf_cookie_name = data.csrf_cookie_name;
                 })
-                .error(function (data, status, headers, config) {
-                    alert('api failure');
-                });
+            .error(function (data, status, headers, config) {
+                ngToast.create({ className: 'danger', content: data.message });
+
+            });
         };
         // loadCSRFToken();checkUsername
 
@@ -32,9 +34,9 @@ angular.module('myApp.controllers', [])
                 return false;
             }
             $http.post('api/registration/check_username', {'username': $scope.username})
-                .success(function (data, status, headers, config) {
-                    $scope.usernameCheck = data.message;
-                })
+            .success(function (data, status, headers, config) {
+                $scope.usernameCheck = data.message;
+            })
         }
 
         $scope.checkEmail = function () {
@@ -43,9 +45,9 @@ angular.module('myApp.controllers', [])
                 return false;
             }
             $http.post('api/registration/check_email', {'email': $scope.email})
-                .success(function (data, status, headers, config) {
-                    $scope.emailCheck = data.message;
-                })
+            .success(function (data, status, headers, config) {
+                $scope.emailCheck = data.message;
+            })
         }
 
 
@@ -65,21 +67,22 @@ angular.module('myApp.controllers', [])
             // console.log(data);
 
             $http.post('api/registration/signup', data)
-                .success(function (data, status, headers, config) {
+            .success(function (data, status, headers, config) {
                     // console.log(data);
-                    alert(data.message);
                     if (data.success == true) {
                         $location.path(data.url).replace();
                     }
                     ;
                 })
-                .error(function (data, status, headers, config) {
-                    alert('api failure');
-                });
+            .error(function (data, status, headers, config) {
+                ngToast.create({ className: 'danger', content: data.message });
+
+            });
         };
     }])
 
-    .controller('LoginCtrl', ['$scope', '$http', '$location', 'headerFooterData', function ($scope, $http, $location, headerFooterData) {
+.controller('LoginCtrl', ['$scope', '$http', '$location', 'headerFooterData','ngToast', 
+    function ($scope, $http, $location, headerFooterData, ngToast) {
 
         headerFooterData.getHeaderFooterData().then(function (data) {
             // console.log(data);
@@ -98,36 +101,39 @@ angular.module('myApp.controllers', [])
             };
 
             $http.post('api/login/login_check', login)
-                .success(function (data, status, headers, config) {
+            .success(function (data, status, headers, config) {
                     // console.log(data);
 
                     if (data.success == true) {
                         $location.path(data.url).replace();
                     } else {
-                        alert(data.message);
+                        ngToast.create({ className: 'danger', content: data.message });
+
                     }
                     ;
                 })
-                .error(function (data, status, headers, config) {
-                    alert('api failure');
-                });
+            .error(function (data, status, headers, config) {
+                ngToast.create({ className: 'danger', content: data.message });
+
+            });
         }
     }])
 
-    .controller('HomeCtrl', ['$scope', '$http', '$location', 'headerFooterData',
-        function ($scope, $http, $location, headerFooterData) {
-            headerFooterData.getHeaderFooterData().then(function (data) {
-                console.log(data);
+.controller('HomeCtrl', ['$scope', '$http', '$location', 'headerFooterData','ngToast',
+    function ($scope, $http, $location, headerFooterData, ngToast) {
+        headerFooterData.getHeaderFooterData().then(function (data) {
+            console.log(data);
                 /*if(data.success === false)
-                 $location.path('login').replace();*/
+                $location.path('login').replace();*/
 
                 $scope.nav = data.menu;
                 //console.log(data);
                 //getAllPost($scope.limit,$scope.offset);
             });
-        }])
+    }])
 
-    .controller('NewPostCtrl', ['$scope', '$http', '$location', 'headerFooterData', function ($scope, $http, $location, headerFooterData) {
+.controller('NewPostCtrl', ['$scope', '$http', '$location', 'headerFooterData','ngToast', 
+    function ($scope, $http, $location, headerFooterData, ngToast) {
 
         headerFooterData.getHeaderFooterData().then(function (data) {
             // console.log(data);
@@ -154,34 +160,33 @@ angular.module('myApp.controllers', [])
             }
 
             $http.post('api/users/submit_new_post', data)
-                .success(function (data, status, headers, config) {
+            .success(function (data, status, headers, config) {
                     //console.log(data);
                     
                     $scope.title = '';
                     $scope.details = '';
-                    $location.path('manage-blog').replace();
+                    ngToast.create({ className: 'success', content: data.message });
                 })
-                .error(function (data, status, headers, config) {
-                    alert('api failure');
-                });
+            .error(function (data, status, headers, config) {
+                ngToast.create({className: 'danger',content: data.message});
+            });
         }
 
         $scope.deletePost=function(post){
             $http.post('api/users/deletePost/', {'id': post})
-                .success(function (data, status, headers, config) {
-                    alert(data.message);
-                    $location.path('manage-blog').replace();
-                    getAllPost($scope.limit, $scope.offset);
-                })
-                .error(function (data, status, headers, config) {
-                    alert(data.message);
-                });
+            .success(function (data, status, headers, config) {
+                ngToast.create({ className: 'success', content: data.message });
+                getAllPost($scope.limit, $scope.offset);
+            })
+            .error(function (data, status, headers, config) {
+                ngToast.create({ className: 'danger', content: data.message });
+            });
         }
 
         var getAllPost = function (limit, offset) {
             $http.get('api/users/get_all_home_post/' + limit + '/' + offset)
-                .success(function (data, status, headers, config) {
-                    $scope.error = '';
+            .success(function (data, status, headers, config) {
+                $scope.error = '';
                     //console.log(data);
                     if (data.success === true) {
                         $scope.allPost = data.posts;
@@ -189,18 +194,18 @@ angular.module('myApp.controllers', [])
                         $scope.error = data.message;
                     }
                 })
-                .error(function (data, status, headers, config) {
-                    alert('api failure');
-                });
+            .error(function (data, status, headers, config) {
+                ngToast.create({ className: 'danger', content: data.message });
+            });
         }
 
 
     }])
 
-    .controller('ProfileCtrl', ['$scope', '$http', '$location', 'headerFooterData', 'UserService',
-        function ($scope, $http, $location, headerFooterData, User) {
+.controller('ProfileCtrl', ['$scope', '$http', '$location', 'headerFooterData','ngToast', 'UserService',
+    function ($scope, $http, $location, headerFooterData, ngToast, User) {
 
-            headerFooterData.getHeaderFooterData().then(function (data) {
+        headerFooterData.getHeaderFooterData().then(function (data) {
                 // console.log(data);
                 if (data.success === false)
                     $location.path('login').replace();
@@ -210,21 +215,24 @@ angular.module('myApp.controllers', [])
             });
 
 
-            $http.get('api/users/user_details')
-                .success(function (data, status, headers, config) {
+        $http.get('api/users/user_details')
+        .success(function (data, status, headers, config) {
                     // console.log(data);
                     if (data.success === true) {
                         $scope.userdata = data.userdata;
                     } else {
-                        alert(data.message);
+                        ngToast.create({ className: 'danger', content: data.message });
+
                     }
                 })
-                .error(function (data, status, headers, config) {
-                    alert('api failure');
-                });
-        }])
+        .error(function (data, status, headers, config) {
+            ngToast.create({ className: 'danger', content: data.message });
 
-    .controller('BlogCtrl', ['$scope', '$http', '$location', 'headerFooterData', function ($scope, $http, $location, headerFooterData) {
+        });
+    }])
+
+.controller('BlogCtrl', ['$scope', '$http', '$location', 'headerFooterData','ngToast', 
+    function ($scope, $http, $location, headerFooterData, ngToast) {
 
         $scope.limit = 5;
         $scope.offset = 0;
@@ -243,8 +251,8 @@ angular.module('myApp.controllers', [])
 
         var getAllPost = function (limit, offset) {
             $http.get('api/users/get_all_home_post/' + limit + '/' + offset)
-                .success(function (data, status, headers, config) {
-                    $scope.error = '';
+            .success(function (data, status, headers, config) {
+                $scope.error = '';
                     //console.log(data);
                     if (data.success === true) {
                         $scope.allPost = data.posts;
@@ -252,13 +260,15 @@ angular.module('myApp.controllers', [])
                         $scope.error = data.message;
                     }
                 })
-                .error(function (data, status, headers, config) {
-                    alert('api failure');
-                });
+            .error(function (data, status, headers, config) {
+                ngToast.create({ className: 'danger', content: data.message });
+
+            });
         }
     }])
 
-    .controller('PostCtrl', ['$scope', '$http', '$location', '$routeParams', 'headerFooterData', function ($scope, $http, $location, $routeParams, headerFooterData) {
+.controller('PostCtrl', ['$scope', '$http', '$location', '$routeParams', 'headerFooterData','ngToast', 
+    function ($scope, $http, $location, $routeParams, headerFooterData, ngToast) {
 
         headerFooterData.getHeaderFooterData().then(function (data) {
             // console.log(data);
@@ -280,27 +290,29 @@ angular.module('myApp.controllers', [])
         // return false;
         var getPostDetails = function (id_posts) {
             $http.get('api/users/post_details/' + id_posts)
-                .success(function (data, status, headers, config) {
-                    console.log(data);
-                    if (data.success === true) {
-                        $scope.post = data.post;
-                        $scope.showLike = data.post.liked;
-                        $scope.showFavorite = data.post.added_to_favorite;
-                        $scope.likes = data.likes_favorites.likes;
-                        $scope.favorites = data.likes_favorites.favorites;
+            .success(function (data, status, headers, config) {
+                console.log(data);
+                if (data.success === true) {
+                    $scope.post = data.post;
+                    $scope.showLike = data.post.liked;
+                    $scope.showFavorite = data.post.added_to_favorite;
+                    $scope.likes = data.likes_favorites.likes;
+                    $scope.favorites = data.likes_favorites.favorites;
                         // console.log($scope.showFavorite);
                     } else {
-                        alert(data.message);
+                        ngToast.create({ className: 'info', content: data.message });
+
                     }
                 })
-                .error(function (data, status, headers, config) {
-                    alert('api failure');
-                });
+            .error(function (data, status, headers, config) {
+                ngToast.create({ className: 'danger', content: data.message });
+
+            });
         };
 
         var getAllComments = function (id_posts) {
             $http.get('api/users/all_comments/' + id_posts)
-                .success(function (data, status, headers, config) {
+            .success(function (data, status, headers, config) {
                     // console.log(data);
                     $scope.error = '';
                     if (data.success === true) {
@@ -309,31 +321,33 @@ angular.module('myApp.controllers', [])
                         $scope.error = data.message;
                     }
                 })
-                .error(function (data, status, headers, config) {
-                    alert('api failure');
-                });
+            .error(function (data, status, headers, config) {
+                ngToast.create({ className: 'danger', content: data.message });
+
+            });
         }
 
         var getAllPost = function (limit, offset) {
 
             $http.get('api/users/get_all_home_post/' + limit + '/' + offset)
-                .success(function (data, status, headers, config) {
+            .success(function (data, status, headers, config) {
 
-                    $scope.error = '';
-                    if (data.success === true) {
-                        $scope.allPosts = data.posts;
-                    } else {
-                        $scope.error = data.message;
-                    }
-                })
-                .error(function (data, status, headers, config) {
-                    alert('api failure');
-                });
+                $scope.error = '';
+                if (data.success === true) {
+                    $scope.allPosts = data.posts;
+                } else {
+                    $scope.error = data.message;
+                }
+            })
+            .error(function (data, status, headers, config) {
+                ngToast.create({ className: 'danger', content: data.message });
+            });
         }
 
         $scope.commentSubmit = function () {
             if ($scope.comment == '') {
-                alert('Please write some comment first');
+                ngToast.create({ className: 'warning', content: 'Please put a comment first' });
+
                 return false;
             }
             ;
@@ -342,15 +356,18 @@ angular.module('myApp.controllers', [])
                 'comment': $scope.comment
             }
             $http.post('api/users/submit_comment/', comment)
-                .success(function (data, status, headers, config) {
+            .success(function (data, status, headers, config) {
                     // console.log(data);
                     $scope.comment = '';
                     getAllComments($routeParams["id_posts"]);
-                    alert(data.message);
+                    ngToast.create({ className: 'danger', content: data.message });
+
+
                 })
-                .error(function (data, status, headers, config) {
-                    alert('api failure');
-                });
+            .error(function (data, status, headers, config) {
+                ngToast.create({ className: 'danger', content: data.message });
+
+            });
         }
 
         $scope.likeFavoriteSubmit = function (type) {
@@ -359,7 +376,7 @@ angular.module('myApp.controllers', [])
             var id_posts = $routeParams["id_posts"];
 
             $http.get('api/users/submit_like_favorite/' + id_posts + '/' + type)
-                .success(function (data, status, headers, config) {
+            .success(function (data, status, headers, config) {
                     // console.log(data);
                     if (data.success) {
                         $scope.likes = data.likes_favorites.likes;
@@ -371,46 +388,52 @@ angular.module('myApp.controllers', [])
                             $scope.showFavorite = true;
                     }
                     ;
-                    alert(data.message);
+                    ngToast.create({ className: 'success', content: data.message });
+
                 })
-                .error(function (data, status, headers, config) {
-                    alert('api failure');
-                });
+            .error(function (data, status, headers, config) {
+                ngToast.create({ className: 'danger', content: data.message });
+
+            });
         }
 
         $scope.likeFavoriteWithdraw = function (type) {
 
             $http.get('api/users/remove_likes_favorites/' + $routeParams["id_posts"] + '/' + type)
-                .success(function (data, status, headers, config) {
-                    console.log(data);
-                    if (data.success === true) {
-                        if (type == 'l')
-                            $scope.showLike = false;
-                        if (type == 'f')
-                            $scope.showFavorite = false;
-                    }
+            .success(function (data, status, headers, config) {
+                console.log(data);
+                if (data.success === true) {
+                    if (type == 'l')
+                        $scope.showLike = false;
+                    if (type == 'f')
+                        $scope.showFavorite = false;
+                }
 
-                    alert(data.message);
-                })
-                .error(function (data, status, headers, config) {
-                    alert('api failure');
-                });
+                ngToast.create({ className: 'danger', content: data.message });
+
+            })
+            .error(function (data, status, headers, config) {
+                ngToast.create({ className: 'danger', content: data.message });
+
+            });
         }
     }])
 
-    .controller('LogoutCtrl', ['$scope', '$http', '$location', 'headerFooterData', function ($scope, $http, $location, headerFooterData) {
+.controller('LogoutCtrl', ['$scope', '$http', '$location', 'headerFooterData','ngToast', 
+    function ($scope, $http, $location, headerFooterData, ngToast) {
 
         $http.get('api/users/logout')
-            .success(function (data, status, headers, config) {
-                headerFooterData.getHeaderFooterData().then(function (data) {
-                    $scope.nav = data.menu;
-                });
-            })
-            .error(function (data, status, headers, config) {
-                alert('api failure');
+        .success(function (data, status, headers, config) {
+            headerFooterData.getHeaderFooterData().then(function (data) {
+                $scope.nav = data.menu;
             });
+        })
+        .error(function (data, status, headers, config) {
+            ngToast.create({ className: 'danger', content: data.message });
+
+        });
     }]);
-// .controller('MenuCtrl', ['$scope','$location','headerFooterData', function($scope,$location,headerFooterData) {
+// .controller('MenuCtrl', ['$scope','$location','headerFooterData','ngToast', function($scope,$location,headerFooterData) {
 
 // headerFooterData.getHeaderFooterData().then(function(data) {
 // 	console.log(data);
