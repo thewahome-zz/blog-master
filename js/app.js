@@ -12,6 +12,8 @@ angular.module('myApp', [
 config(['$routeProvider', function($routeProvider) {
 
 	//Common
+	$routeProvider.when('/', {templateUrl: 'partials/frontend/home.html', controller: 'HomeCtrl'});
+
 	$routeProvider.when('/registration', {templateUrl: 'partials/registration.html', controller: 'RegistrationCtrl'});
 	$routeProvider.when('/login', {templateUrl: 'partials/login.html', controller: 'LoginCtrl'});
 	$routeProvider.when('/logout', {templateUrl: 'partials/logout.html', controller: 'LogoutCtrl'});

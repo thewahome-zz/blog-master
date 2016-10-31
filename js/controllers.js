@@ -116,11 +116,8 @@ angular.module('myApp.controllers', [])
 
     .controller('HomeCtrl', ['$scope', '$http', '$location', 'headerFooterData',
         function ($scope, $http, $location, headerFooterData) {
-
-            $scope.limit = 5;
-            $scope.offset = 0;
             headerFooterData.getHeaderFooterData().then(function (data) {
-                // console.log(data);
+                console.log(data);
                 /*if(data.success === false)
                  $location.path('login').replace();*/
 
