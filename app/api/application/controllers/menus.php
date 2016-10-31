@@ -12,12 +12,12 @@ class Menus extends CI_Controller
                     'success' => false,
                     'menu' => array(
                         array(
-                            'active' => true,
+                            'position' => true,
                             'href' => '#/login',
                             'label' => 'Login'
                         ),
                         array(
-                            'active' => false,
+                            'position' => false,
                             'href' => '#/registration',
                             'label' => 'Registration'
                         )
@@ -39,22 +39,22 @@ class Menus extends CI_Controller
                 'success' => true,
                 'menu' => array(
                     array(
-                        'active' => true,
+                        'position' => 0,
                         'href' => '#/home',
                         'label' => 'Home'
                     ),
                     array(
-                        'active' => false,
+                        'position' => 1,
                         'href' => '#/manage-blog',
                         'label' => 'Manage Blog'
                     ),
                     array(
-                        'active' => false,
+                        'position' => 2,
                         'href' => '#/profile',
                         'label' => 'Profile('.$userName.')'
                     ),
                     array(
-                        'active' => false,
+                        'position' => 3,
                         'href' => '#/logout',
                         'label' => 'Logout'
                     )
@@ -65,22 +65,22 @@ class Menus extends CI_Controller
                 'success' => true,
                 'menu' => array(
                     array(
-                        'active' => true,
+                        'position' => 0,
                         'href' => '#/home',
                         'label' => 'Home'
                     ),
                     array(
-                        'active' => false,
+                        'position' => 1,
                         'href' => '#/blog',
                         'label' => 'The Blog'
                     ), 
                     array(
-                        'active' => false,
+                        'position' => 2,
                         'href' => '#/profile',
                         'label' => 'Profile('.$userName.')'
                     ),
                     array(
-                        'active' => false,
+                        'position' => 3,
                         'href' => '#/logout',
                         'label' => 'Logout'
                     )
