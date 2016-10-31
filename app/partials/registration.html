@@ -1,0 +1,96 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!-- You'll want to use a responsive image option so this logo looks good on devices - I recommend using something like retina.js (do a quick Google search for it and you'll find it) -->
+            <a class="navbar-brand" href="#/home">Home</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav navbar-right" ng-repeat="menu in nav">
+                <li><a href="{{menu.href}}"> {{menu.label}} </a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+	<div class="row main">
+		<div class="panel-heading">
+			<div class="panel-title text-center">
+				<h1 class="title">Register</h1>
+				<hr />
+			</div>
+		</div> 
+		<div class="main-login main-center">
+			<form class="form-horizontal" method="post" action="#">
+				
+				<div class="form-group">
+					<label for="name" class="cols-sm-2 control-label">Your Username</label>
+					<div class="cols-sm-10">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+							<input type="text" ng-model="username" ng-change="checkUsername()" class="form-control" name="name" id="name"  placeholder="Enter your username"/> <span>{{usernameCheck}}</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="email" class="cols-sm-2 control-label">Your Email</label>
+					<div class="cols-sm-10">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+							<input type="text" class="form-control" name="email" id="email"  placeholder="Enter your Email" ng-change="checkEmail()" ng-model="email"/> <span>{{emailCheck}}</span>
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="password" class="cols-sm-2 control-label">Password</label>
+					<div class="cols-sm-10">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+							<input type="password" ng-model="password" class="form-control" name="password" id="password"  placeholder="Enter your Password"/>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
+					<div class="cols-sm-10">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+							<input type="password" class="form-control" name="confirm" id="confirm"  placeholder="Confirm your Password" ng-model="repassword"/>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group ">
+					<button type="button" ng-click="signup()" class="btn btn-primary btn-lg btn-block login-button">Register</button>
+				</div>
+				<div class="login-register">
+					<ul class="menu">
+						<li class=" {{menu.active}} " ng-repeat="menu in nav">
+							<a href="{{menu.href}}"> {{menu.label}} </a>
+						</li>
+					</ul>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+<!-- <div menu> </div> -->
+
+
+

@@ -1,0 +1,86 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!-- You'll want to use a responsive image option so this logo looks good on devices - I recommend using something like retina.js (do a quick Google search for it and you'll find it) -->
+            <a class="navbar-brand" href="#/home">Home</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav navbar-right" ng-repeat="menu in nav">
+                <li><a href="{{menu.href}}"> {{menu.label}} </a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+
+	<div class="row">
+
+		<div class="col-lg-12">
+			<h1 class="page-header">Profile
+				<small>It's Nice to Meet You!</small>
+			</h1>
+			<ol class="breadcrumb">
+				<li><a href="#/home">Home</a>
+				</li>
+				<li class="active">Profile</li>
+			</ol>
+		</div>
+
+	</div>
+
+	<div class="row">
+
+		<div class="col-md-4">
+			<img class="img-responsive" src="http://placehold.it/750x450">
+		</div>
+		<div class="col-md-8">
+			<h3>Username:
+				<small>{{userdata.username}}</small>
+			</h3>
+			<h3>First name:
+				<small>{{userdata.first_name}}</small>
+			</h3>
+			<h3>Last name
+				<small>{{userdata.last_name}}</small>
+			</h3>
+			<h3>email:
+				<small>{{userdata.email}}</small>
+			</h3>
+			 
+
+			<ul class="list-unstyled list-inline list-social-icons">
+				<li class="tooltip-social facebook-link"><a href="#facebook-profile" data-toggle="tooltip"
+					data-placement="top" title="Facebook"><i
+					class="fa fa-facebook-square fa-2x"></i></a>
+				</li>
+				<li class="tooltip-social linkedin-link"><a href="#linkedin-profile" data-toggle="tooltip"
+					data-placement="top" title="LinkedIn"><i
+					class="fa fa-linkedin-square fa-2x"></i></a>
+				</li>
+				<li class="tooltip-social twitter-link"><a href="#twitter-profile" data-toggle="tooltip"
+					data-placement="top" title="Twitter"><i
+					class="fa fa-twitter-square fa-2x"></i></a>
+				</li>
+				<li class="tooltip-social google-plus-link"><a href="#google-plus-profile" data-toggle="tooltip"
+					data-placement="top" title="Google+"><i
+					class="fa fa-google-plus-square fa-2x"></i></a>
+				</li>
+			</ul>
+		</div>
+
+	</div>
+
+
+
+</div>
+<!-- /.container -->
+ 
