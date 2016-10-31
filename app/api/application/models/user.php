@@ -42,10 +42,9 @@ class User extends CI_Model {
 
 	public function get_user_details($id_users)
 	{
-		$this->db->select('id_users,username,first_name,last_name,email,date_created,date_updated');
+		$this->db->select('*');
 		$this->db->where('id_users', $id_users);
 		$q = $this->db->get('users', 1);
-		log_message('error','message');
 		return $q->result_array();
 	}
 

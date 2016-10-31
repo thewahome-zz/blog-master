@@ -21,27 +21,27 @@ var app = angular.module('myApp.services', []);
          		}
          	};
          }])
-.value('version', '0.1');*/
+         .value('version', '0.1');*/
 
 
-app.factory('UserService', [function() {
-  return {
-    isLogged: false,
-    username: ''
-  };
-}]);
+         app.factory('UserService', [function() {
+          return {
+            isLogged: false,
+            username: ''
+          };
+        }]);
 
-app.factory('headerFooterData', ['$http', '$q',
-         function($http, $q) {
+         app.factory('headerFooterData', ['$http', '$q',
+           function($http, $q) {
             return {
-               getHeaderFooterData: function(type) {
-                  var deferred = $q.defer();
-                  $http.get('api/menus/').success(function(data) {
-                     deferred.resolve(data);
-                  }).error(function() {
-                     deferred.reject();
-                  });
-                  return deferred.promise;
-               }
-            };
-         }]);
+             getHeaderFooterData: function(type) {
+              var deferred = $q.defer();
+              $http.get('api/menus/').success(function(data) {
+               deferred.resolve(data);
+             }).error(function() {
+               deferred.reject();
+             });
+             return deferred.promise;
+           }
+         };
+       }]);

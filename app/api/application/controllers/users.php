@@ -19,52 +19,7 @@ class Users extends CI_Controller {
 		$this->jsonify(array('session_id' => $this->session->userdata('session_id')));
 	}
 
-	public function get_header_footer_data($type = 1)
-	{
-		$menu = array();
-		switch ($type) {
-			case 1:
-			array_push($menu, array(
-				'label' => 'Home',
-				'active' => 'active',
-				'href' => '#/home'));
-			array_push($menu, array(
-				'label' => 'Profile',
-				'active' => '',
-				'href' => '#/profile'));
-			array_push($menu, array(
-				'label' => 'Logout',
-				'active' => '',
-				'href' => '#/logout'));
-			break;
-
-			case 0:
-			array_push($menu, array(
-				'label' => 'Login',
-				'active' => '',
-				'href' => '#/login'));
-			array_push($menu, array(
-				'label' => 'Registration',
-				'active' => 'active',
-				'href' => '#/registration'));
-			break;
-
-			default:
-			array_push($menu, array(
-				'label' => 'Login',
-				'active' => '',
-				'href' => '#/login'));
-			array_push($menu, array(
-				'label' => 'Registration',
-				'active' => 'active',
-				'href' => '#/registration'));
-			break;
-		}
-
-		$this->jsonify($menu);
-
-	}
-
+	
 	public function submit_new_post()
 	{
 		$data = (array)json_decode(file_get_contents("php://input"));
@@ -251,17 +206,6 @@ class Users extends CI_Controller {
 		}
 	}
 
-
-
-
-
-
-
-
-
-
-
-
 	public function logout()
 	{
 		$this->session->sess_destroy();
@@ -271,6 +215,72 @@ class Users extends CI_Controller {
 	{
 		print_r(json_encode($data));
 	}
+
+
+	/*public function get_header_footer_data($type = 1)
+	{
+		$data=GetUserData();
+		$menu = array();
+		switch ($type) {
+			case 1:
+			array_push($menu, array(
+				'label' => 'Home',
+				'active' => 'active',
+				'href' => '#/home'));
+			array_push($menu, array(
+				'label' => 'The Blog',
+				'active' => '',
+				'href' => '#/blog'));		
+			array_push($menu, array(
+				'label' => 'Profile()',
+				'active' => '',
+				'href' => '#/profile'));
+			array_push($menu, array(
+				'label' => 'Logout',
+				'active' => '',
+				'href' => '#/logout'));
+			break;
+
+			case 0:
+			array_push($menu, array(
+				'label' => 'Login',
+				'active' => '',
+				'href' => '#/login'));
+			array_push($menu, array(
+				'label' => 'Registration',
+				'active' => 'active',
+				'href' => '#/registration'));
+			break;
+
+			default:
+			array_push($menu, array(
+				'label' => 'Logined',
+				'active' => '',
+				'href' => '#/login'));
+			array_push($menu, array(
+				'label' => 'Registration',
+				'active' => 'active',
+				'href' => '#/registration'));
+			break;
+		}
+
+		$this->jsonify($menu);
+
+	}
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+	
 
 }
 

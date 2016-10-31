@@ -119,7 +119,7 @@ angular.module('myApp.controllers', [])
 		$location.path('login').replace();*/
 
 		$scope.nav = data.menu;
-		console.log(data);
+		//console.log(data);
 		//getAllPost($scope.limit,$scope.offset);
 	});
 	}])
@@ -148,7 +148,7 @@ angular.module('myApp.controllers', [])
 
 		$http.post('api/users/submit_new_post',data)
 		.success(function(data, status, headers, config) {
-			console.log(data);
+			//console.log(data);
 			alert(data.message);
 			$scope.title = '';
 			$scope.details = '';
@@ -167,6 +167,7 @@ angular.module('myApp.controllers', [])
 			$location.path('login').replace();
 
 		$scope.nav = data.menu;
+		//console.log($scope.nav);
 	});
 
 
@@ -205,7 +206,7 @@ angular.module('myApp.controllers', [])
 		$http.get('api/users/get_all_home_post/'+limit+'/'+offset)
 		.success(function(data, status, headers, config) {
 			$scope.error = '';
-			console.log(data);
+			//console.log(data);
 			if (data.success === true) {
 				$scope.allPost = data.posts;
 			}else{

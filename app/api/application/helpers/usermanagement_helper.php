@@ -4,7 +4,7 @@ function GetUserData() {
   $id_users = $CI->session->userdata('id_users');
   if ($id_users) {         
     $CI->load->model('User');           
-    $data['rows']=$CI->User->get_user_details($id_users);
+    $data['userData']=$CI->User->get_user_details($id_users);
     return $data; 
   } 
   else
