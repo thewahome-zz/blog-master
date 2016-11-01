@@ -78,6 +78,7 @@ angular.module('myApp.controllers', [])
                 });
         };
     }])
+
     .controller('LoginCtrl', ['$scope', '$http', '$location', 'headerFooterData', function ($scope, $http, $location, headerFooterData) {
 
         headerFooterData.getHeaderFooterData().then(function (data) {
@@ -112,6 +113,7 @@ angular.module('myApp.controllers', [])
                 });
         }
     }])
+
     .controller('HomeCtrl', ['$scope', '$http', '$location', 'headerFooterData',
         function ($scope, $http, $location, headerFooterData) {
 
@@ -127,14 +129,18 @@ angular.module('myApp.controllers', [])
                 //getAllPost($scope.limit,$scope.offset);
             });
         }])
+
     .controller('NewPostCtrl', ['$scope', '$http', '$location', 'headerFooterData', function ($scope, $http, $location, headerFooterData) {
 
         headerFooterData.getHeaderFooterData().then(function (data) {
             // console.log(data);
             if (data.success === false)
                 $location.path('login').replace();
-
+            $scope.limit = 5;
+            $scope.offset = 0;
             $scope.nav = data.menu;
+            getAllPost($scope.limit, $scope.offset);
+
         });
 
         $scope.submitPost = function () {
@@ -156,12 +162,32 @@ angular.module('myApp.controllers', [])
                     alert(data.message);
                     $scope.title = '';
                     $scope.details = '';
+                    $location.path('manage-blog').replace();
                 })
                 .error(function (data, status, headers, config) {
                     alert('api failure');
                 });
         }
+
+        var getAllPost = function (limit, offset) {
+            $http.get('api/users/get_all_home_post/' + limit + '/' + offset)
+                .success(function (data, status, headers, config) {
+                    $scope.error = '';
+                    //console.log(data);
+                    if (data.success === true) {
+                        $scope.allPost = data.posts;
+                    } else {
+                        $scope.error = data.message;
+                    }
+                })
+                .error(function (data, status, headers, config) {
+                    alert('api failure');
+                });
+        }
+
+
     }])
+
     .controller('ProfileCtrl', ['$scope', '$http', '$location', 'headerFooterData', 'UserService',
         function ($scope, $http, $location, headerFooterData, User) {
 
@@ -222,7 +248,6 @@ angular.module('myApp.controllers', [])
                 });
         }
     }])
-
 
     .controller('PostCtrl', ['$scope', '$http', '$location', '$routeParams', 'headerFooterData', function ($scope, $http, $location, $routeParams, headerFooterData) {
 
@@ -362,8 +387,8 @@ angular.module('myApp.controllers', [])
                     alert('api failure');
                 });
         }
-
     }])
+
     .controller('LogoutCtrl', ['$scope', '$http', '$location', 'headerFooterData', function ($scope, $http, $location, headerFooterData) {
 
         $http.get('api/users/logout')

@@ -24,7 +24,7 @@ config(['$routeProvider', function($routeProvider) {
 
 	// Backend
 	$routeProvider.when('/dashboard', {templateUrl: 'partials/backend/home.html', controller: 'HomeCtrl'});
-	$routeProvider.when('/manage-blog', {templateUrl: 'partials/backend/manage-blog.html', controller: 'BlogCtrl'});
+	$routeProvider.when('/manage-blog', {templateUrl: 'partials/backend/manage-blog.html', controller: 'NewPostCtrl'});
 	$routeProvider.when('/newpost', {templateUrl: 'partials/backend/newpost.html', controller: 'NewPostCtrl'});
 
 	$routeProvider.otherwise({redirectTo: '/login'});
