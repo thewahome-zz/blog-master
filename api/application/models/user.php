@@ -40,6 +40,19 @@ class User extends CI_Model {
 		return $this->db->insert('posts', $data);
 	}
 
+	public function DeletePost($id){
+		 $this->db->where('id_posts', $id);
+        $this->db->delete('posts'); 
+        $report = array();
+        $report['error'] = $this->db->_error_number();
+        $report['message'] = $this->db->_error_message();
+        if($report !== 0){
+            return true;
+        }else{
+            return false;
+        }
+	}
+
 	public function get_user_details($id_users)
 	{
 		$this->db->select('*');

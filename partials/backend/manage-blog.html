@@ -75,7 +75,7 @@
 									
 									<td>{{post.title}} </td>
 									<td>{{post.date_created}} </td>
-									<td>  <a><i class="fa fa-edit"></i></a>
+									<td>  <a href="#/post/{{post.id_posts}}" class="btn btn-xs btn-default"><i class="fa fa-edit"></i></a> | <a ng-click="deletePost(post.id_posts)" class="btn btn-xs btn-default"><i class="fa fa-times red"></i></a>
 										
 									</td>
 								</tr>

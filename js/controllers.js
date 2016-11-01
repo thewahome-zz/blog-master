@@ -159,13 +159,25 @@ angular.module('myApp.controllers', [])
             $http.post('api/users/submit_new_post', data)
                 .success(function (data, status, headers, config) {
                     //console.log(data);
-                    alert(data.message);
+                    
                     $scope.title = '';
                     $scope.details = '';
                     $location.path('manage-blog').replace();
                 })
                 .error(function (data, status, headers, config) {
                     alert('api failure');
+                });
+        }
+
+        $scope.deletePost=function(post){
+            $http.post('api/users/deletePost/', {'id': post})
+                .success(function (data, status, headers, config) {
+                    alert(data.message);
+                    $location.path('manage-blog').replace();
+                    getAllPost($scope.limit, $scope.offset);
+                })
+                .error(function (data, status, headers, config) {
+                    alert(data.message);
                 });
         }
 

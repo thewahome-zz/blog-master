@@ -38,7 +38,26 @@ class Users extends CI_Controller {
 				);
 			$this->jsonify($return);
 		}
-		
+	}
+
+	public function deletePost()
+	{
+		$data = (array)json_decode(file_get_contents("php://input"));
+		$result = $this->User->DeletePost($data['id']);
+
+		if ($result === true) {
+			$return = array(
+				'success' => true,
+				'message' => 'Delete successful!',
+				);
+			$this->jsonify($return);
+		} else {
+			$return = array(
+				'success' => false,
+				'message' => 'Delete failed!',
+				);
+			$this->jsonify($return);
+		}
 	}
 
 	public function get_all_home_post($limit = 5,$offset = 0)
