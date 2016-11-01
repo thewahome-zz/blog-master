@@ -98,9 +98,11 @@ angular.module('myApp.controllers', [])
 		$http.post('api/login/login_check',login)
 		.success(function(data, status, headers, config) {
 			// console.log(data);
-			// alert(data.message);
+			
 			if (data.success == true) {
 				$location.path(data.url).replace();
+			}else{
+				alert(data.message);
 			};
 		})
 		.error(function(data, status, headers, config) {
