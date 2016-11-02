@@ -4,6 +4,7 @@
 // Declare app level module which depends on filters, and services
 angular.module('myApp', [
 	'ngRoute',
+	'ngResource',
 	'myApp.filters',
 	'myApp.services',
 	'myApp.directives',
@@ -41,5 +42,28 @@ config(['$routeProvider', function($routeProvider) {
     timeout:6000
   });
 }])
+
+.config(function ($httpProvider) {
+  $httpProvider.responseInterceptors.push('myHttpInterceptor');
+
+  var spinnerFunction = function spinnerFunction(data, headersGetter) {
+    $("#spinner").show();
+    return data;
+  };
+
+  $httpProvider.defaults.transformRequest.push(spinnerFunction);
+})
+
+.factory('myHttpInterceptor', function ($q, $window) {
+  return function (promise) {
+    return promise.then(function (response) {
+      $("#spinner").hide();
+      return response;
+    }, function (response) {
+      $("#spinner").hide();
+      return $q.reject(response);
+    });
+  };
+})
 
 ;

@@ -96,10 +96,25 @@
                 <hr>
             </div>
         </div>
-        <!-- /.row -->
+        <div class="row">
+            <div>
+            <button class="btn" ng-click="load()">Load Tweets</button>
+              <img id="spinner" ng-src="img/spinner.gif" style="display:none;">
+          </div>
 
-    </div>
-    <!-- /.container -->
+          <div>
+              <ul ng-repeat="tweet in tweets">
+                <li>
+                  <img ng-src="{{tweet.profile_image_url}}" alt=""> &nbsp; {{tweet.from_user}}
+                  {{tweet.text}}
+              </li>
+          </ul>
+      </div>
+  </div>
+  <!-- /.row -->
+
+</div>
+<!-- /.container -->
 
 </div>
 <!-- /.section-colored -->

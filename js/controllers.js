@@ -119,8 +119,8 @@ angular.module('myApp.controllers', [])
         }
     }])
 
-.controller('HomeCtrl', ['$scope', '$http', '$location', 'headerFooterData','ngToast',
-    function ($scope, $http, $location, headerFooterData, ngToast) {
+.controller('HomeCtrl', ['$scope', '$http','$resource', '$location', 'headerFooterData','ngToast',
+    function ($scope, $http, $resource, $location, headerFooterData, ngToast) {
         headerFooterData.getHeaderFooterData().then(function (data) {
             console.log(data);
                 /*if(data.success === false)
@@ -130,6 +130,20 @@ angular.module('myApp.controllers', [])
                 //console.log(data);
                 //getAllPost($scope.limit,$scope.offset);
             });
+          $scope.resultsPerPage = 5;
+          $scope.page = 1;
+          $scope.searchTerm = "angularjs";
+
+          $scope.twitter = $resource('https://jsonplaceholder.typicode.com',
+            
+            { get: { method:'JSONP' } });
+
+          $scope.load = function() {
+            $scope.twitter.get(function(data) {
+              $scope.tweets = data.results;
+              console.log(data);
+            });
+          };
     }])
 
 .controller('NewPostCtrl', ['$scope', '$http', '$location', 'headerFooterData','ngToast', 
