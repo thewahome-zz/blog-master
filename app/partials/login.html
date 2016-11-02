@@ -1,47 +1,69 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!-- You'll want to use a responsive image option so this logo looks good on devices - I recommend using something like retina.js (do a quick Google search for it and you'll find it) -->
+            <a class="navbar-brand" href="#/home">Blog Master</a>
+        </div>
 
+        
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav navbar-right" ng-repeat="menu in nav | orderBy:'-position'">
+                <li><a href="{{menu.href}}"> {{menu.label}} </a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
 <div class="container">
-
-	<div class="row">
-		<div class="text-center" style="padding:50px 0">
-			<div class="logo">login</div>
-			<!-- Main Form -->
-			<div class="login-form-1">
-				<form id="login-form" class="text-left">
-					<div class="login-form-main-message"></div>
-					<div class="main-login-form">
-						<div class="login-group">
-							<div class="form-group">
-								<label for="lg_username" class="sr-only">Username</label>
-								<input type="text" ng-model="username" class="form-control" id="lg_username" name="lg_username" placeholder="username">
-							</div>
-							<div class="form-group">
-								<label for="lg_password" class="sr-only">Password</label>
-								<input type="password" ng-model="password" class="form-control" id="lg_password" name="lg_password" placeholder="password">
-							</div>
-							<div class="form-group login-group-checkbox">
-								<input type="checkbox" id="lg_remember" name="lg_remember">
-								<label for="lg_remember">remember</label>
-							</div>
-						</div>
-						<button type="submit" ng-click="login()" class="login-button"><i class="fa fa-chevron-right"></i></button>
-					</div>
-					<div class="etc-login-form">
-						<p class=" {{menu.active}} " ng-repeat="menu in nav | orderBy:'-position'">
-							<a href="{{menu.href}}"> {{menu.label}} </a>
-							<p>
-							</div>
-						</form>
-					</div>
-					<!-- end:Main Form -->
-				</div>
+	<div class="row main">
+		<div class="panel-heading">
+			<div class="panel-title text-center">
+				<h1 class="title">Log In</h1>
+				<hr />
 			</div>
+		</div> 
+		<div class="main-login main-center">
+			<form class="form-horizontal" method="post" action="#">
+				
+				<div class="form-group">
+					<label for="name" class="cols-sm-2 control-label">Your Username</label>
+					<div class="cols-sm-10">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+							<input type="text" ng-model="username" class="form-control" name="name" id="name"  placeholder="Enter your username"/> 
+						</div>
+					</div>
+				</div>
 
+				 
+				
+				<div class="form-group">
+					<label for="password" class="cols-sm-2 control-label">Password</label>
+					<div class="cols-sm-10">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+							<input type="password" ng-model="password" class="form-control" name="password" id="password"  placeholder="Enter your Password"/>
+						</div>
+					</div>
+				</div>
+
+				 
+
+				<div class="form-group ">
+					<button type="button" ng-click="login()" class="btn btn-primary btn-lg btn-block login-button">Log In</button>
+				</div>
+				 
+			</form>
 		</div>
-		<!-- /.container -->
+	</div>
+</div>
 
 
 
-		<!-- <div menu> </div> -->
-
-
+ 

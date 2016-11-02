@@ -3,7 +3,7 @@
 /* Controllers */
 
 angular.module('myApp.controllers', [])
-.controller('RegistrationCtrl', ['$scope','$http','$location','headerFooterData', function($scope,$http,$location,headerFooterData) {
+.controller('RegistrationController', ['$scope','$http','$location','headerFooterData', function($scope,$http,$location,headerFooterData) {
 
 	headerFooterData.getHeaderFooterData().then(function(data) {
 		// console.log(data);
@@ -77,7 +77,7 @@ angular.module('myApp.controllers', [])
 		});
 	};
 }])
-.controller('LoginCtrl', ['$scope','$http','$location','headerFooterData', function($scope,$http,$location,headerFooterData) {
+.controller('LoginController', ['$scope','$http','$location','headerFooterData', function($scope,$http,$location,headerFooterData) {
 
 	headerFooterData.getHeaderFooterData().then(function(data) {
 		// console.log(data);
@@ -108,7 +108,7 @@ angular.module('myApp.controllers', [])
 		});
 	}
 }])
-.controller('HomeCtrl', ['$scope','$http','$location','headerFooterData', 
+.controller('HomeController', ['$scope','$http','$location','headerFooterData', 
 	function($scope,$http,$location,headerFooterData) {
 
 		$scope.limit = 5;
@@ -123,7 +123,7 @@ angular.module('myApp.controllers', [])
 		//getAllPost($scope.limit,$scope.offset);
 	});
 	}])
-.controller('NewPostCtrl', ['$scope','$http','$location','headerFooterData', function($scope,$http,$location,headerFooterData) {
+.controller('NewpostController', ['$scope','$http','$location','headerFooterData', function($scope,$http,$location,headerFooterData) {
 
 	headerFooterData.getHeaderFooterData().then(function(data) {
 		// console.log(data);
@@ -158,7 +158,7 @@ angular.module('myApp.controllers', [])
 		});
 	}
 }])
-.controller('ProfileCtrl', ['$scope','$http','$location','headerFooterData','UserService', 
+.controller('ProfileController', ['$scope','$http','$location','headerFooterData','UserService', 
 	function($scope,$http,$location,headerFooterData,User) {
 
 		headerFooterData.getHeaderFooterData().then(function(data) {
@@ -185,7 +185,7 @@ angular.module('myApp.controllers', [])
 		});
 	}])
 
-.controller('BlogCtrl', ['$scope','$http','$location','headerFooterData', function($scope,$http,$location,headerFooterData) {
+.controller('BlogController', ['$scope','$http','$location','headerFooterData', function($scope,$http,$location,headerFooterData) {
 
 	$scope.limit = 5;
 	$scope.offset = 0;
@@ -220,7 +220,7 @@ angular.module('myApp.controllers', [])
 }])
 
 
-.controller('PostCtrl', ['$scope','$http','$location','$routeParams','headerFooterData', function($scope,$http,$location,$routeParams,headerFooterData) {
+.controller('PostController', ['$scope','$http','$location','$routeParams','headerFooterData', function($scope,$http,$location,$routeParams,headerFooterData) {
 
 	headerFooterData.getHeaderFooterData().then(function(data) {
 		// console.log(data);
@@ -358,7 +358,7 @@ angular.module('myApp.controllers', [])
 	}
 
 }])
-.controller('LogoutCtrl', ['$scope','$http','$location','headerFooterData', function($scope,$http,$location,headerFooterData) {
+.controller('LogoutController', ['$scope','$http','$location','headerFooterData', function($scope,$http,$location,headerFooterData) {
 
 	$http.get('api/users/logout')
 	.success(function(data, status, headers, config) {
