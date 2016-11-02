@@ -40,8 +40,8 @@ class Menus extends CI_Controller
                 'menu' => array(
                     array(
                         'position' => 0,
-                        'href' => '#/home',
-                        'label' => 'Home'
+                        'href' => '#/dashboard',
+                        'label' => 'Dashboard'
                     ),
                     array(
                         'position' => 1,
